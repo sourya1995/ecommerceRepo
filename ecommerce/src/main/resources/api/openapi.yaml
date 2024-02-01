@@ -1,52 +1,53 @@
-openapi: '3.0.3'
+openapi: 3.0.3
 info:
   title: Sample Ecommerce App
   description: >
     'This is a ***sample ecommerce app API***.  You can find out more about Swagger at [swagger.io](http://swagger.io).
     Description supports markdown markup. For example, you can use the `inline code` using back ticks.'
-  termsOfService: some license information
+  termsOfService: https://example.com/
   contact:
     name: Sourya Bhattacharya
-    url: https://www.github.com/sourya1995
+    url: https://github.com/sourya1995
     email: souryabhattacharyav3@gmail.com
   license:
     name: MIT
-    url: whatever.com
-  version: '1.0.0'
+    url: https://example.com/
+  version: 1.0.0
 externalDocs:
-  description: any documentation
+  description: Any document link you want to generate along with API.
   url: http://swagger.io
 servers:
   - url: https://ecommerce.swagger.io/v2
 tags:
   - name: cart
-    description: everything about cart
+    description: Everything about cart
     externalDocs:
-      description: find out more
+      description: Find out more (extra document link)
       url: http://swagger.io
   - name: order
-    description: operation about orders
+    description: Operation about orders
   - name: user
-    description: operation about users
+    description: Operations about users
   - name: customer
-    description: operation about user persona customer
+    description: Operations about user's persona customer
   - name: address
-    description: operation about user address
+    description: Operations about user's address
   - name: payment
-    description: operation about user payment
+    description: Operations about payments
   - name: shipping
-    description: operation about shipping
+    description: Operations about shippings
   - name: product
-    description: operation about products
+    description: Operations about products
   - name: card
     description: card operation
+
 paths:
   /api/v1/carts/{customerId}:
     get:
       tags:
         - cart
       summary: Returns the shopping cart
-      description: Returns the shopping cart of the given customer
+      description: Returns the shopping cart of given customer
       operationId: getCartByCustomerId
       parameters:
         - name: customerId
@@ -70,13 +71,13 @@ paths:
                 items:
                   $ref: '#/components/schemas/Cart'
         404:
-          description: Given customer ID does not exist
+          description: Given customer ID doesn't exist
           content: {}
     delete:
       tags:
         - cart
       summary: Delete the shopping cart
-      description: Deletes the shopping cart of the given customer
+      description: Deletes the shopping cart of given customer
       operationId: deleteCart
       parameters:
         - name: customerId
@@ -89,14 +90,14 @@ paths:
         204:
           description: successful operation
         404:
-          description: Given customer ID does not exist
+          description: Given customer ID doesn't exist
           content: {}
   /api/v1/carts/{customerId}/items:
     get:
       tags:
         - cart
       summary: Returns the list of products in user's shopping cart
-      description: Returns the items in shopping cart of the given customer
+      description: Returns the items in shopping cart of given customer
       operationId: getCartItemsByCustomerId
       parameters:
         - name: customerId
@@ -120,13 +121,13 @@ paths:
                 items:
                   $ref: '#/components/schemas/Item'
         404:
-          description: Given customer ID does not exist
+          description: Given customer ID doesn't exist
           content: {}
     post:
       tags:
         - cart
       summary: Adds an item in shopping cart
-      description: Adds an item in shopping cart if it doesn't already exist, or increment quantity by the specified number of items if it does.
+      description: Adds an item to the shopping cart if it doesn't already exist, or increment quantity by the specified number of items if it does.
       operationId: addCartItemsByCustomerId
       parameters:
         - name: customerId
@@ -165,7 +166,7 @@ paths:
       tags:
         - cart
       summary: Replace/add an item in shopping cart
-      description: Adds an item to the shopping cart if it doesn't already exist, or replace with a given item if it does.
+      description: Adds an item to the shopping cart if it doesn't already exist, or replace with given item if it does.
       operationId: addOrReplaceItemsByCustomerId
       parameters:
         - name: customerId
@@ -198,14 +199,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/Item'
         404:
-          description: Given customer ID does not exist
+          description: Given customer ID doesn't exist
           content: {}
   /api/v1/carts/{customerId}/items/{itemId}:
     get:
       tags:
         - cart
       summary: Returns given item from user's shopping cart
-      description: Returns given item from shopping cart of a given customer
+      description: Returns given item from shopping cart of given customer
       operationId: getCartItemsByItemId
       parameters:
         - name: customerId
@@ -240,8 +241,8 @@ paths:
     delete:
       tags:
         - cart
-      summary: delete the item from shopping cart
-      description: deletes the item from shopping cart of a given customer
+      summary: Delete the item from shopping cart
+      description: Deletes the item from shopping cart of given customer
       operationId: deleteItemFromCart
       parameters:
         - name: customerId
@@ -252,7 +253,7 @@ paths:
             type: string
         - name: itemId
           in: path
-          description: Item (product) identifier
+          description: Item (product) Identifier
           required: true
           schema:
             type: string
@@ -263,7 +264,7 @@ paths:
     post:
       tags:
         - order
-      summary: Creates a new order for the given request
+      summary:  Creates a new order for the given order request
       description: Creates a new order for the given order request.
       operationId: addOrder
       requestBody:
@@ -295,8 +296,8 @@ paths:
     get:
       tags:
         - order
-      summary: Returns the orders of a given user
-      description: Returns the orders of a given user
+      summary: Returns the orders of given user
+      description: Returns orders of given user
       operationId: getOrdersByCustomerId
       parameters:
         - name: customerId
@@ -320,14 +321,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/Order'
         404:
-          description: Order doesn't exist for the given user
+          description: Order doesn't exist for given user.
           content: {}
   /api/v1/orders/{id}:
     get:
       tags:
         - order
-      summary: Returns the order of the given order Id
-      description: Returns the order of the given order Id
+      summary: Returns the order of given order ID
+      description: Returns orders of given order ID
       operationId: getOrdersByOrderId
       parameters:
         - name: id
@@ -338,27 +339,27 @@ paths:
             type: string
       responses:
         200:
-          description: If order exists
+          description: If order exists.
           content:
             application/xml:
               schema:
-                $ref: '#components/schemas/Order'
+                $ref: '#/components/schemas/Order'
             application/json:
               schema:
-                $ref: '#components/schemas/Order'
+                $ref: '#/components/schemas/Order'
         404:
-          description: Order does not exist for given user
+          description: Order doesn't exist for given user.
           content: {}
   /api/v1/customers:
     get:
       tags:
         - customer
       summary: Returns all customers
-      description: Returns all customers, or empty collection if no customers found
+      description: Returns all customers, or empty collection if no use found
       operationId: getAllCustomers
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -375,7 +376,7 @@ paths:
       tags:
         - customer
       summary: Returns a customer
-      description: Returns a customer identifiable by Id
+      description: Returns a customers identifiable by given ID
       operationId: getCustomerById
       parameters:
         - name: id
@@ -386,7 +387,7 @@ paths:
             type: string
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -397,8 +398,8 @@ paths:
     delete:
       tags:
         - customer
-      summary: deletes the customer
-      description: Deletes the customer identifiable by the given ID
+      summary: Deletes the customer
+      description: Deletes the customer identifiable by given ID
       operationId: deleteCustomerById
       parameters:
         - name: id
@@ -416,7 +417,7 @@ paths:
       tags:
         - customer
       summary: Returns all customer's cards
-      description: Returns all customer's cards based on the provided customer id
+      description: Returns all customer's cards based on given customer ID
       operationId: getCardsByCustomerId
       parameters:
         - name: id
@@ -427,7 +428,7 @@ paths:
             type: string
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -440,7 +441,7 @@ paths:
       tags:
         - customer
       summary: Returns all customer's addresses
-      description: Returns all customers' addresses based on given customer Id
+      description: Returns all customer's addresses based on given customer ID
       operationId: getAddressesByCustomerId
       parameters:
         - name: id
@@ -451,7 +452,7 @@ paths:
             type: string
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -468,7 +469,7 @@ paths:
       operationId: getAllAddresses
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -483,8 +484,8 @@ paths:
     post:
       tags:
         - address
-      summary: Creates a new user address
-      description: Creates a new address, does nothing if address already exists
+      summary: Creates a new user addresses
+      description: Creates a new user addresses. Does nothing if address already exists.
       operationId: createAddress
       requestBody:
         content:
@@ -496,7 +497,7 @@ paths:
               $ref: '#/components/schemas/AddAddressReq'
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -520,7 +521,7 @@ paths:
             type: string
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -531,9 +532,9 @@ paths:
     delete:
       tags:
         - address
-      summary: deletes user address
-      description: Deletes user address based on the given address Id
-      operationId: deleteAddressById
+      summary: Deletes user's address
+      description: Deletes user's address based on given address ID.
+      operationId: deleteAddressesById
       parameters:
         - name: id
           in: path
@@ -543,18 +544,18 @@ paths:
             type: string
       responses:
         202:
-          description: accept the delete Request, and perform delete operation. If the address does not exist, then do nothing.
+          description: Accepts the deletion request and perform deletion. If ID does not exist, does nothing.
           content: {}
   /api/v1/cards:
     get:
       tags:
         - card
-      summary: Returns all (total) user's cards
-      description: Return all the users cards
+      summary: Returns all user's cards
+      description: Returns all user's cards, else empty collection
       operationId: getAllCards
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -569,8 +570,8 @@ paths:
     post:
       tags:
         - card
-      summary: Creates a new card
-      description: Creates a new card, or replaces existing card.
+      summary: Creates a  new card
+      description: Creates a new card. or replaces the existing one
       operationId: registerCard
       requestBody:
         content:
@@ -582,7 +583,7 @@ paths:
               $ref: '#/components/schemas/AddCardReq'
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -594,8 +595,8 @@ paths:
     get:
       tags:
         - card
-      summary: Returns user card
-      description: Returns a specific user's card
+      summary: Returns user's card
+      description: Returns user's card based on given card ID.
       operationId: getCardById
       parameters:
         - name: id
@@ -606,7 +607,7 @@ paths:
             type: string
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -618,7 +619,7 @@ paths:
       tags:
         - card
       summary: Deletes card's address
-      description: Deletes card's address based on a given card ID.
+      description: Deletes card's address based on given card ID.
       operationId: deleteCardById
       parameters:
         - name: id
@@ -629,7 +630,7 @@ paths:
             type: string
       responses:
         202:
-          description: Accepts the deletion request and performs the deletion. If the ID does not exist, do nothing.
+          description: Accepts the deletion request and perform deletion. If ID does not exist, does nothing.
           content: {}
   /api/v1/payments:
     post:
@@ -648,23 +649,19 @@ paths:
               $ref: '#/components/schemas/PaymentReq'
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Authorization'
+                $ref: '#/components/schemas/Authorization'
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Authorization'
+                $ref: '#/components/schemas/Authorization'
     get:
       tags:
         - payment
-      summary: Returns the payment Authorization
-      description: Return the payment Authorization for the specified order
+      summary: Returns the payment authorization
+      description: Return the payment authorization for the specified order
       operationId: getOrdersPaymentAuthorization
       parameters:
         - name: id
@@ -704,7 +701,7 @@ paths:
               $ref: '#/components/schemas/ShippingReq'
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -727,18 +724,18 @@ paths:
             type: string
       responses:
         200:
-          description: for successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/Shipment'
+                  $ref: '#/components/schemas/Shipment'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/Shipment'
+                  $ref: '#/components/schemas/Shipment'
   /api/v1/products:
     get:
       tags:
@@ -777,7 +774,7 @@ paths:
             default: 10
       responses:
         200:
-          description: For successful fetch
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -793,11 +790,11 @@ paths:
     get:
       tags:
         - product
-      summary: returns a product
-      description: Returns a product that matches the given product ID.
+      summary: Returns a product
+      description: Returns the product that matches the given product ID
       operationId: getProduct
       parameters:
-        - name: Id
+        - name: id
           in: path
           description: Product Identifier
           required: true
@@ -805,7 +802,7 @@ paths:
             type: string
       responses:
         200:
-          description: for successful fetch.
+          description: For successful fetch.
           content:
             application/xml:
               schema:
@@ -813,35 +810,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-
-
-
-
-
-
 components:
   schemas:
     Cart:
-      description: shopping cart of the user
+      description: Shopping Cart of the user
       type: object
       properties:
         customerId:
-          description: Id of the customer that possesess the cart
+          description: Id of the customer who possesses the cart
           type: string
         items:
-          description: Collection of items in a cart.
+          description: Collection of items in cart.
           type: array
           items:
             $ref: '#/components/schemas/Item'
     Item:
-      description: Items in shipping cart
+      description: Items in shopping cart
       type: object
       properties:
         id:
           description: Item Identifier
           type: string
         quantity:
-          description: the item quantity
+          description: The item quantity
           type: integer
           format: int32
         unitPrice:
@@ -849,24 +840,24 @@ components:
           type: number
           format: double
     Order:
-      description: represents an order
+      description: Represents an order
       type: object
       properties:
         id:
-          description: Order Identifier
+          description: Order identifier
           type: string
         customer:
-          $ref: '#/components/schema/User'
+          $ref: '#/components/schemas/User'
         address:
           $ref: '#/components/schemas/Address'
         card:
           $ref: '#/components/schemas/Card'
         date:
-          description: Order Date and Time details
+          description: Order's data and time details
           type: string
           format: date-time
         items:
-          description: Collection of order items
+          description: Collection of order items.
           type: array
           items:
             $ref: '#/components/schemas/Item'
@@ -897,16 +888,17 @@ components:
           properties:
             userId:
               type: string
+
       xml:
         name: AddAddressReq
     Address:
       type: object
       properties:
         number:
-          description: house or flat number
+          description: house of flat number
           type: string
         residency:
-          description: Society or building name
+          description: Socieity or building name
           type: string
         street:
           description: street name
@@ -929,7 +921,7 @@ components:
       type: object
       properties:
         cardNumber:
-          description: Card number
+          description: Card Number
           type: string
         expires:
           description: Expiration date
@@ -953,7 +945,7 @@ components:
       type: object
       properties:
         authorized:
-          description: Flag that indicates whether payment is authorized or not.
+          description: Flag that specified whether payment is authorized or not
           type: boolean
         message:
           description: Approval or rejection message
@@ -964,7 +956,7 @@ components:
       type: object
       properties:
         orderId:
-          description: Order identifier
+          description: Order Identifier
           type: string
         carrier:
           description: Shipping Carrier
@@ -979,20 +971,21 @@ components:
       xml:
         name: Shipment
     ShippingReq:
-      description: Contains information required for shipping Request
+      description: Contains information required for Shipping request
       type: object
       properties:
         orderId:
-          description: order identifier
+          description: Order Identifier
           type: string
         address:
           $ref: '#/components/schemas/Address'
         itemCount:
-          description: the number of items in the order
+          description: The number of items in the order
           type: integer
           format: int32
       xml:
         name: ShippingReq
+
     User:
       type: object
       properties:
@@ -1022,16 +1015,16 @@ components:
       type: object
       properties:
         customer:
-          #description: URI used to fetch the customer
+          #description: URI that should be used to fetch the customer
           $ref: '#/components/schemas/URI'
         address:
-          #description: URI used to fetch the address
+          #description: URI that should be used to fetch the address
           $ref: '#/components/schemas/URI'
         card:
-          #description: URI used to fetch the payment card
+          #description: URI that should be used to fetch the payment card
           $ref: '#/components/schemas/URI'
         items:
-          #description: URI used to fetch the items from the shopping cart
+          #description: URI that should be used to fetch the items from shopping cart
           $ref: '#/components/schemas/URI'
       xml:
         name: NewOrder
@@ -1043,17 +1036,17 @@ components:
       type: object
       properties:
         orderId:
-          description: order identification
+          description: Order Identification
           type: string
         time:
-          description: timestamp when this order was created
+          description: Timestamp when this authorization was created
           type: string
           format: date-time
         authorized:
-          description: flag that indicates whether this payment was authorized
+          description: Flat that specify whether the payment is authorized
           type: boolean
         message:
-          description: approval or rejection message
+          description: Approavl or rejection message
           type: string
         error:
           description: Processing error description, if any
@@ -1061,18 +1054,18 @@ components:
       xml:
         name: Authorization
     PaymentReq:
-      description: contains the payment request information
+      description: Contains the payment request information
       type: object
       properties:
         orderId:
-          description: order identifier
+          description: Order Identifier
           type: string
         customer:
-          $ref: '#components/schemas/CustomerInfoOnCard'
+          $ref: '#/components/schemas/CustomerInfoOnCard'
         address:
-          $ref: '#components/schemas/Address'
+          $ref: '#/components/schemas/Address'
         card:
-          $ref: '#components/schemas/Card'
+          $ref: '#/components/schemas/Card'
         amount:
           description: Payment amount
           type: number
@@ -1080,11 +1073,11 @@ components:
       xml:
         name: PaymentReq
     CustomerInfoOnCard:
-      description: Customer information required for payment Processing
+      description: Customer information required for payment processing
       type: object
       properties:
         firstName:
-          description: customer first name
+          description: Customer first name
           type: string
         lastName:
           description: Customer last name
@@ -1096,35 +1089,28 @@ components:
       type: object
       properties:
         id:
-          description: Product information
-          type: object
-          properties:
-            id:
-              description: product identifier
-              type: string
-            name:
-              description: Product name
-              type: string
-            description:
-              description: Product description
-              type: string
-            imageUrl:
-              description: Product image URL
-              type: string
-            price:
-              description: Product price
-              type: number
-              format: double
-            count:
-              description: Product count
-              type: integer
-              format: int32
-            tag:
-              description: Tags associated with product
-              type: array
-              uniqueItems: true
-              items:
-                type: string
-
-
-
+          description: Product identifier
+          type: string
+        name:
+          description: Product Name
+          type: string
+        description:
+          description: Prodcut's description
+          type: string
+        imageUrl:
+          description: Product image's URL
+          type: string
+        price:
+          description: Product price
+          type: number
+          format: double
+        count:
+          description: Product count
+          type: integer
+          format: int32
+        tag:
+          description: Tags associated with the product
+          type: array
+          uniqueItems: true
+          items:
+            type: string
