@@ -22,7 +22,7 @@ import java.util.Locale;
 @ControllerAdvice
 public class RestApiErrorHandler {
     private static final Logger log = LoggerFactory.getLogger(RestApiErrorHandler.class);
-    private final MessageSource messageSource;
+    private final MessageSource messageSource; /* support international messages */
 
     @Autowired
     public RestApiErrorHandler(MessageSource messageSource){
