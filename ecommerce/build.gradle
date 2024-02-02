@@ -42,6 +42,7 @@ sourceSets.main.resources.srcDir "${swaggerSources.eStore.code.outputDir}/src/ma
 
 repositories {
 	mavenCentral()
+    maven{ url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
@@ -52,10 +53,22 @@ dependencies {
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'io.springfox:springfox-oas:3.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'com.h2database:h2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+    jvmArgs '--enable-preview'
+    useJUnitPlatform()
+}
+
+bootJar {
+    manifest {
+        attributes 'Implementation-Version': "${version}"
+        attributes 'Implementation-Title': "${project.name}"
+        attributes 'Manifest-Version': "1.0"
+    }
 }
