@@ -1014,7 +1014,7 @@ components:
       description: Contains the new order request information
       type: object
       properties:
-        customer:
+        customerId:
           #description: URI that should be used to fetch the customer
           $ref: '#/components/schemas/URI'
         address:

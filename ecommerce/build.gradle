@@ -61,8 +61,8 @@ dependencies {
 }
 
 test {
-    jvmArgs '--enable-preview'
-    useJUnitPlatform()
+//    jvmArgs '--enable-preview'
+//    useJUnitPlatform()
 }
 
 bootJar {
